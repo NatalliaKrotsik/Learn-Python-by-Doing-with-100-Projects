@@ -1,0 +1,3 @@
+- (Optional) You can visiualize the data.db file in the following link. 
+Once you upload the file, use the drop-down list to select the "albums" table for viewing.
+https://inloop.github.io/sqlite-viewer/
