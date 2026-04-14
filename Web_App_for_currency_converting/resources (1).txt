@@ -1,0 +1,5 @@
+- Install the libraries with:
+pip install streamlit requests
+- Use this API endpoint to get currencies:
+https://v6.exchangerate-api.com/v6/{api_key}/latest/USD
+- Get an API key for free from https://v6.exchangerate-api.com
