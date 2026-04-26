@@ -1,0 +1,264 @@
+Build a production-ready, enterprise-level test automation framework using Python for both API and UI testing.
+
+## Technology Stack
+
+- Python 3.12+
+- Pytest
+- Playwright
+- Poetry
+- Requests (or httpx for API)
+- Pydantic
+- PyYAML
+- python-dotenv
+- Allure Reporting
+- Faker
+- pytest-xdist
+- pytest-rerunfailures
+
+---
+
+## Framework Goals
+
+The framework must be:
+
+- Scalable
+- Flexible
+- Secure
+- Maintainable
+- CI/CD friendly
+- Enterprise-grade
+- Suitable for Middle/Senior QA Automation Engineers
+
+It should support:
+
+- API testing
+- UI testing
+- Parallel execution
+- Multiple environments
+- Secure secret management
+- Rich reporting
+- Easy extensibility
+
+---
+
+## Project Structure
+
+text automation-framework/ ├── config/ │   ├── environments/ │   │   ├── test.yaml │   │   ├── stage.yaml │   │   └── prod.yaml │   ├── settings.py │   └── constants.py │ ├── src/ │   ├── api/ │   │   ├── client/ │   │   │   ├── api_client.py │   │   │   └── response_wrapper.py │   │   ├── services/ │   │   │   ├── auth_service.py │   │   │   ├── users_service.py │   │   │   └── products_service.py │   │   └── models/ │   │       ├── request_models.py │   │       └── response_models.py │   │ │   ├── ui/ │   │   ├── pages/ │   │   │   ├── base_page.py │   │   │   ├── login_page.py │   │   │   └── dashboard_page.py │   │   ├── components/ │   │   └── locators/ │   │ │   ├── core/ │   │   ├── config_manager.py │   │   ├── secret_manager.py │   │   ├── logger.py │   │   ├── exceptions.py │   │   └── utils.py │   │ │   └── schemas/ │ ├── tests/ │   ├── api/ │   ├── ui/ │   ├── integration/ │   └── conftest.py │ ├── .env ├── .env.example ├── pyproject.toml ├── pytest.ini ├── README.md └── .gitignore
+
+---
+
+## Configuration Management
+
+Implement a robust Configuration Manager class.
+
+Requirements:
+
+- Load YAML files dynamically based on environment.
+- Support environments: test, stage, prod.
+- Allow environment selection via CLI:
+  - pytest --env=test
+- Use singleton pattern.
+- Validate configuration with Pydantic.
+- Expose typed properties.
+
+Example usage:
+
+python settings = ConfigManager() base_url = settings.api.base_url browser = settings.ui.browser
+
+---
+
+## Secret Management
+
+Implement secure secret handling.
+
+Requirements:
+
+- Load secrets from .env.
+- Never commit secrets to Git.
+- Support CI/CD environment variables.
+- Provide typed access via SecretManager.
+
+Example:
+
+python secret_manager = SecretManager() username = secret_manager.api_username password = secret_manager.api_password
+
+---
+
+## API Client
+
+Create a reusable enterprise API client.
+
+Features:
+
+- Base URL from configuration.
+- Authentication support.
+- Automatic headers.
+- Request/response logging.
+- Retry strategy.
+- Timeout handling.
+- Response validation.
+- Support GET, POST, PUT, PATCH, DELETE.
+- Attach requests and responses to Allure.
+
+Example:
+
+python response = api_client.get("/users/1")
+
+---
+
+## Playwright UI Layer
+
+Implement Page Object Model.
+
+Requirements:
+
+- BasePage abstraction.
+- Reusable components.
+- Smart waits.
+- Automatic screenshots on failure.
+- Video recording support.
+- Trace collection.
+- Allure attachments.
+
+Example:
+
+python login_page.login(username, password)
+
+---
+
+## Pytest Fixtures
+
+Create advanced fixtures in conftest.py.
+
+Required fixtures:
+
+- config
+- secrets
+- api_client
+- browser
+- context
+- page
+- authenticated_page
+- test_data_factory
+
+Scope optimization:
+
+- session
+- function
+- class
+
+---
+
+## Environment Switching
+
+The framework must support:
+
+bash pytest --env=test pytest --env=stage pytest --env=prod
+
+No code changes required.
+
+---
+
+## CI/CD Requirements
+
+Compatible with:
+
+- GitHub Actions
+- GitLab CI
+- Jenkins
+- Azure DevOps
+
+Must support:
+
+- Parallel execution
+- Headless mode
+- Artifact publishing
+- Allure reports
+- Environment variables
+- Matrix builds
+
+---
+
+## Security Requirements
+
+- Secrets stored only in .env or CI secrets.
+- .env must be ignored by Git.
+- No hardcoded credentials.
+- Token masking in logs.
+
+---
+
+## Reporting
+
+Integrate Allure.
+
+Requirements:
+
+- API request/response attachments
+- Screenshots
+- Videos
+- Traces
+- Custom steps
+- Environment metadata
+
+---
+
+## Design Patterns
+
+Use:
+
+- Singleton (configuration)
+- Factory (API clients, test data)
+- Page Object Model
+- Service Layer
+- Builder Pattern (test data)
+- Dependency Injection via fixtures
+
+---
+
+## Best Practices
+
+- Type hints everywhere
+- Pydantic models
+- SOLID principles
+- DRY
+- Clean Architecture
+- Rich logging
+- Custom exceptions
+- Reusable utilities
+
+---
+
+## Deliverables
+
+Generate complete implementation including:
+
+- Folder structure
+- pyproject.toml
+- pytest.ini
+- Sample YAML configs
+- .env.example
+- ConfigManager
+- SecretManager
+- APIClient
+- Playwright BasePage
+- Example API tests
+- Example UI tests
+- GitHub Actions pipeline
+- Allure integration
+
+---
+
+## Expected Outcome
+
+A professional-grade automation framework that provides:
+
+- Easy switching between environments
+- Secrets outside version control
+- Seamless CI/CD integration
+- Clean, reusable architecture
+- Safe team collaboration
+- High scalability
+- Excellent maintainability
+
+The code must be production-ready and follow industry best practices used by senior QA Automation engineers.
